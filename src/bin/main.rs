@@ -13,6 +13,9 @@ struct FlashCardFront {
     topic: String
 }
 
+struct MainHashMap {
+    nested_hashmap: HashMap<String, HashMap<FlashCardFront,FlashCardBack>>
+}
 
 
 
@@ -20,8 +23,11 @@ struct FlashCardFront {
 // make nice CLI app for personal use
 // use rand crate to mix up cards in a topic.
 fn main() {
-    let mut flashcards: HashMap<FlashCardFront, FlashCardBack> = HashMap::new();
-    flashcards.insert(
+    let mut flashcards = MainHashMap{ nested_hashmap: HashMap::new()};
+
+    
+    let mut aws_flashcards: HashMap<FlashCardFront, FlashCardBack> = HashMap::new();
+    aws_flashcards.insert(
         FlashCardFront {
             topic: "What is EC2".to_owned()
         },
@@ -31,6 +37,9 @@ fn main() {
     );
 
 
+    for (key, value) in aws_flashcards {
+        println!("{:?} {:?}",key,value);
+    }
 
 
 }
